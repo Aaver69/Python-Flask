@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+
+{% block title %} InterfaceCli {% endblock %}
+
+
+
+{% block navbar %}
+<div class="navbar navbar-default" xmlns:width="http://www.w3.org/1999/xhtml"
+     xmlns:width="http://www.w3.org/1999/xhtml">
+
+    <!-- ... -->
+
+</div>
+{% endblock %}
+
+
+{% block content %}
+
+
+<h1 class="text-center">Liste des configurations dispoinibles <span class="glyphicon glyphicon-list"></span></h1><br>
+.
+
+<ul class="list-group">
+    {% for config in configs %}
+        <li><a href="/config/detail/{{ config['id']}}/" class="list-group-item">[{{ config['id']}}] {{ config['nom'] }}</a></li>
+    {% endfor %}
+</ul>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="alert alert-{{ messages.0.0 }}" role="alert">
+      {% for message in messages %}
+        {{ message }} </br>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+

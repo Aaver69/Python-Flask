@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+<script src="static/bootstrap-notify.js"> </script>
+<script src="static/bootstrap-notify.min.js">
+    if(document.getElementById('btn').clicked == true)
+{
+   $.notify({
+	title: "<strong>Sauvegarde:</strong> ",
+	message: "La configuration a bien été sauvegardée dans les bas fonds"
+});
+}
+</script>
+
+
+</script>
+
+{% block title %} InterfaceCli {% endblock %}
+
+
+
+{% block navbar %}
+<div class="navbar navbar-fixed-top">
+
+    <!-- ... -->
+
+</div>
+{% endblock %}
+
+
+{% block content %}
+
+
+<h1 style="text-align:center">Gestionnaire de Configuration<span class="glyphicon glyphicon-list"></span></h1>
+
+
+Modification de la configuration {{ config['nom'] }}
+
+<form id="chloro" method="POST" action="">
+    {% for field in form %}
+    {% if is_hidden(field) %}
+    {{ field }}
+    {% else %}
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-2">{{field.label}}</div>
+            <span class="col-md-8">{{field() }}</span>
+        </div>
+    </div>
+
+
+    {% endif %}
+
+    {% endfor %}
+
+    <input id="btn" class="btn btn-lg btn-success submit-button" value="Sauvegarder" type="submit" >
+    <a href="/config/detail/{{ config['id'] }}"><button type="button" class="btn btn-danger">Retour </button></a>
+
+</form>
+
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+

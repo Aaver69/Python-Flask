@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="text-center">Détail de la Configuration {{ config['nom'] }}</h1>
+
+<div class="jumbotron well">
+    <h2>
+        Description
+    </h2>
+    <p>
+        Cette configuration est utilisée pour la {{ config['nom'] }}
+    </p>
+    <a href="/config/edit/{{ config['id'] }}/">
+        <button type="button" class="btn btn-success">Modifier cette configuration</button>
+    </a>
+    <a href="/config/list/">
+        <button type="button" class="btn btn-danger">Retour</button>
+    </a>
+
+
+</div>
+<form action="/config/files/select/" method="POST">
+    <div class="jumbotron well">
+        <h3>Fichiers susceptibles d'être transformés</h3><br>
+    </div>
+    <dl class="list-group">
+        {% for item in liste %}
+        <dl class="dl-horizontal">
+            <dt>{{ item[1] }}</dt>
+            <dd>
+            {% if item[0] %}
+                <span class="glyphicon glyphicon-ok" style="color:green"></span>
+            {% else %}
+                <span class="glyphicon glyphicon-remove" style="color:red"></span>
+            {% endif %}
+             : {{ item[2] }}
+                <br>
+         <a href="/progress/{{ config['id'] }}/">
+            <button type="button" class="btn btn-primary">
+                Lancer la génération
+            </button>
+        </a>
+            </dd>
+
+        </dl>
+        {% endfor %}
+{% with messages = get_flashed_messages(with_categories=true, category_filter=["success"]) %}
+  {% if messages %}
+    <div class="alert alert-{{ messages.0.0 }}" role="alert">
+      {% for category, message in messages %}
+        {{ message }} </br>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+    </dl>
+
+</form>
+{% block scripts %}
+{{super()}}
+<script src="/static/js/button_disabled.js"></script>
+{% endblock %}
+
+{% endblock content %}

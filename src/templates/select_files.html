@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="text-center">Fichiers séléctionés </h1>
+
+{% for item in checked %}
+ <li class="list-group-item">{{ item }}</li>
+{% endfor %}
+<input id="btn" class="btn btn-lg btn-success submit-button" value="Confirmer" type="submit" >
+    <a href="javascript:history.go(-1)"><button type="button" class="btn btn-danger">Retour </button></a>
+{% endblock content %}
